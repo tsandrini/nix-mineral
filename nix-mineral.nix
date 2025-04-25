@@ -452,6 +452,24 @@ in
           '';
         };
       };
+      fileSystem = {
+        baseFileSystems = l.mkOption {
+          type = l.types.bool;
+          default = true;
+          description = ''
+            Enable all filesystem related hardenings for
+            /home, /root, /tmp, /var, /boot, /src and /etc
+          '';
+        };
+        specialFileSystems = l.mkOption {
+          type = l.types.bool;
+          default = true;
+          description = ''
+            Enable all filesystem related hardenings for
+            /dev/shm, /run, /dev, /proc
+          '';
+        };
+      }
     };
   };
 
@@ -726,7 +744,7 @@ in
       # Bind mounting /usr with nodev causes boot failure
       # Bind mounting /boot/efi at all causes complete system failure
 
-      fileSystems = {
+      fileSystems = lib.mkIf config.fileSystem.baseFileSystems {
         # noexec on /home can be very inconvenient for desktops. See overrides.
         "/home" = {
           device = l.mkDefault "/home";
@@ -802,7 +820,7 @@ in
       # Harden special filesystems while maintaining NixOS defaults as outlined
       # here:
       # https://github.com/NixOS/nixpkgs/blob/e2dd4e18cc1c7314e24154331bae07df76eb582f/nixos/modules/tasks/filesystems.nix
-      boot.specialFileSystems = {
+      boot.specialFileSystems = lib.mkIf config.fileSystem.specialFileSystems {
         # Add noexec to /dev/shm
         "/dev/shm" = {
           options = [
