@@ -15,26 +15,26 @@
   # Set boot parameter "module.sig_enforce=0" to allow loading unsigned kernel
   # modules, which may include certain drivers. Lockdown must also be disabled,
   # see option below this one.
-  # nm-overrides.compatibility.allow-unsigned-modules.enable = true;
+  # nix-mineral.overrides.compatibility.allow-unsigned-modules = true;
 
   # Disable Linux Kernel Lockdown to *permit* loading unsigned kernel modules
   # and hibernation.
-  # nm-overrides.compatibility.no-lockdown.enable = true;
+  # nix-mineral.overrides.compatibility.no-lockdown = true;
 
   # Enable binfmt_misc. This is required for Roseta to function.
-  # nm-overrides.compatibility.binfmt-misc.enable = true;
+  # nix-mineral.overrides.compatibility.binfmt-misc = true;
 
   # Reenable the busmaster bit at boot. This may help with low resource systems
   # that are prevented from booting by the defaults of nix-mineral.
-  # nm-overrides.compatibility.busmaster-bit.enable = true;
+  # nix-mineral.overrides.compatibility.busmaster-bit = true;
 
   # Reenable io_uring, which is the cause of many vulnerabilities. This may
   # be desired for specific environments concerning Proxmox.
-  # nm-overrides.compatibility.io-uring.enable = true;
+  # nix-mineral.overrides.compatibility.io-uring = true;
 
   # Enable ip forwarding. Useful for certain VM networking and is required if
   # the system is meant to function as a router.
-  # nm-overrides.compatibility.ip-forward.enable = true;
+  # nix-mineral.overrides.compatibility.ip-forward = true;
 
 
 
@@ -44,64 +44,64 @@
 # options reduce security to a certain degree.
 
   # Reenable multilib, may be useful to playing certain games.
-  # nm-overrides.desktop.allow-multilib.enable = true;
+  # nix-mineral.overrides.desktop.allow-multilib = true;
 
   # Reenable unprivileged userns. Although userns is the target of many
   # exploits, it also used in the Chromium sandbox, unprivileged containers,
   # and bubblewrap among many other applications.
-  # nm-overrides.desktop.allow-unprivileged-userns.enable = true;
+  # nix-mineral.overrides.desktop.allow-unprivileged-userns = true;
 
   # Enable doas-sudo wrapper, useful for scripts that use "sudo." Installs
   # nano for rnano as a "safe" method of editing text as root. 
   # Use this when replacing sudo with doas, see "Software Choice."
   # sudo = doas
   # doasedit/sudoedit = doas rnano
-  # nm-overrides.desktop.doas-sudo-wrapper.enable = true;
+  # nix-mineral.overrides.desktop.doas-sudo-wrapper = true;
 
   # Allow executing binaries in /home. Highly relevant for games and other
   # programs executing in the /home folder.
-  # nm-overrides.desktop.home-exec.enable = true;
+  # nix-mineral.overrides.desktop.home-exec = true;
 
   # Allow executing binaries in /tmp. Certain applications may need to execute
   # in /tmp, Java being one example.
-  # nm-overrides.desktop.tmp-exec.enable = true;
+  # nix-mineral.overrides.desktop.tmp-exec = true;
 
   # Allow executing binaries in /var/lib. LXC, and system-wide Flatpaks are
   # among some examples of applications that requiring executing in /var/lib.
-  # nm-overrides.desktop.var-lib-exec.enable = true;
+  # nix-mineral.overrides.desktop.var-lib-exec = true;
 
   # Allow all users to use nix, rather than just users of the "wheel" group.
   # May be useful for allowing a non-wheel user to, for example, use devshell.
-  # nm-overrides.desktop.nix-allow-all-users.enable = true;
+  # nix-mineral.overrides.desktop.nix-allow-all-users = true;
 
   # Automatically allow all connected devices at boot in USBGuard. Note that
   # for laptop users, inbuilt speakers and bluetooth cards may be disabled
   # by USBGuard by default, so whitelisting them manually or enabling this
   # option may solve that.
-  # nm-overrides.desktop.usbguard-allow-at-boot.enable = true;
+  # nix-mineral.overrides.desktop.usbguard-allow-at-boot = true;
 
   # Enable USBGuard dbus daemon and add polkit rules to integrate USBGuard with
   # GNOME Shell. If you use GNOME, this means that USBGuard automatically
   # allows all newly connected devices while unlocked, and blacklists all
   # newly connected devices while locked. This is obviously very convenient,
   # and is similar behavior to handling USB as ChromeOS and GrapheneOS.
-  # nm-overrides.usbguard-gnome-integration.enable = true;
+  # nix-mineral.overrides.usbguard-gnome-integration = true;
 
   # Completely disable USBGuard to avoid hassle with handling USB devices at
   # all.
-  # nm-overrides.desktop.usbguard-disable.enable = true;
+  # nix-mineral.overrides.desktop.usbguard-disable = true;
 
   # Rather than disable ptrace entirely, restrict ptrace so that parent
   # processes can ptrace descendants. May allow certain Linux game anticheats
   # to function.
-  # nm-overrides.desktop.yama-relaxed.enable = true;
+  # nix-mineral.overrides.desktop.yama-relaxed = true;
 
   # Allow processes that can ptrace a process to read its process information.
   # Requires ptrace to even be allowed in the first place, see above option.
   # Note: While nix-mineral has made provisions to unbreak systemd, it is
   # not supported by upstream, and breakage may still occur:
   # https://github.com/systemd/systemd/issues/12955
-  # nm-overrides.desktop.hideproc-relaxed.enable = true;
+  # nix-mineral.overrides.desktop.hideproc-relaxed = true;
 
 
 
@@ -112,19 +112,19 @@
 
   # Allow symmetric multithreading and just use default CPU mitigations, to
   # potentially improve performance.
-  # nm-overrides.performance.allow-smt.enable = true;
+  # nix-mineral.overrides.performance.allow-smt = true;
 
   # Disable all CPU mitigations. Do not use with the above option. May improve
   # performance further, but is even more dangerous!
-  # nm-overrides.performance.no-mitigations.enable = true;
+  # nix-mineral.overrides.performance.no-mitigations = true;
 
   # Enable bypassing the IOMMU for direct memory access. Could increase I/O
   # performance on ARM64 systems, with risk. See URL: https://wiki.ubuntu.com/ARM64/performance
-  # nm-overrides.performance.iommu-passthrough.enable = true;
+  # nix-mineral.overrides.performance.iommu-passthrough = true;
 
   # Page table isolation mitigates some KASLR bypasses and the Meltdown CPU
   # vulnerability. It may also tax performance, so this option disables it.
-  # nm-overrides.perforamcne.no-pti.enable = true;
+  # nix-mineral.overrides.perforamcne.no-pti = true;
 
 
 
@@ -134,16 +134,16 @@
 
   # Lock the root account. Requires another method of privilege escalation, i.e
   # sudo or doas, and declarative accounts to work properly.
-  # nm-overrides.security.lock-root.enable = true;
+  # nix-mineral.overrides.security.lock-root = true;
 
   # Reduce swappiness to bare minimum. May reduce risk of writing sensitive
   # information to disk, but hampers zram performance. Also useless if you do
   # not even use a swap file/partition, i.e zram only setup.
-  # nm-overrides.security.minimum-swappiness.enable = true;
+  # nix-mineral.overrides.security.minimum-swappiness = true;
 
   # Enable SAK (Secure Attention Key). SAK prevents keylogging, if used
   # correctly. See URL: https://madaidans-insecurities.github.io/guides/linux-hardening.html#accessing-root-securely
-  # nm-overrides.security.sysrq-sak.enable = true;
+  # nix-mineral.overrides.security.sysrq-sak = true;
 
   # Privacy/security split.
   # This option disables TCP timestamps. By default, nix-mineral enables
@@ -153,22 +153,22 @@
   # Read more about the issue here:
   # URL: (In favor of disabling): https://madaidans-insecurities.github.io/guides/linux-hardening.html#tcp-timestamps
   # URL: (In favor of enabling): https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf
-  # nm-overrides.security.tcp-timestamp-disable.enable = true;
+  # nix-mineral.overrides.security.tcp-timestamp-disable = true;
 
   # Disable loading kernel modules (except those loaded at boot via kernel
   # commandline)
   # Very likely to cause breakage unless you can compile a list of every module
   # you need and add that to your boot parameters manually.
-  # nm-overrides.security.disable-modules.enable = true;
+  # nix-mineral.overrides.security.disable-modules = true;
 
   # Disable TCP window scaling. May help mitigate TCP reset DoS attacks, but
   # may also harm network performance when at high latencies.
-  # nm-overrides.security.disable-tcp-window-scaling.enable = true;
+  # nix-mineral.overrides.security.disable-tcp-window-scaling = true;
 
   # Disable bluetooth entirely. nix-mineral borrows a privacy preserving
   # bluetooth configuration file by default, but if you never use bluetooth
   # at all, this can reduce attack surface further.
-  # nm-overrides.security.disable-bluetooth.enable = true;
+  # nix-mineral.overrides.security.disable-bluetooth = true;
 
   # Disable Intel ME related kernel modules. This is to avoid putting trust in
   # the highly privilege ME system, but there are potentially other
@@ -184,11 +184,11 @@
   # https://github.com/Kicksecure/security-misc/pull/236#issuecomment-2229092813
   # https://github.com/Kicksecure/security-misc/issues/239
   #
-  # nm-overrides.security.disable-intelme-kmodules.enable = true;
+  # nix-mineral.overrides.security.disable-intelme-kmodules = true;
 
   # DO NOT USE THIS OPTION ON ANY PRODUCTION SYSTEM! FOR TESTING PURPOSES ONLY!
   # Use hardened-malloc as default memory allocator for all processes.
-  # nm-overrides.security.hardened-malloc.enable = true;
+  # nix-mineral.overrides.security.hardened-malloc = true;
 
 
 
@@ -197,11 +197,11 @@
 
   # Replace sudo with doas. doas has a lower attack surface, but is less
   # audited.
-  # nm-overrides.software-choice.doas-no-sudo.enable = true;
+  # nix-mineral.overrides.software-choice.doas-no-sudo = true;
 
   # Replace systemd-timesyncd with chrony, for NTS support and its seccomp
   # filter.
-  # nm-overrides.software-choice.secure-chrony.enable = true;
+  # nix-mineral.overrides.software-choice.secure-chrony = true;
 
   # Use Linux Kernel with hardened patchset. Concurs a multitude of security
   # benefits, but prevents hibernation.*
@@ -212,10 +212,10 @@
   # Therefore, it is recommended to choose an LTS kernel like 5.15, 6.1, or 6.6
   # in your own system configuration.*)
   #
-  # nm-overrides.software-choice.hardened-kernel.enable = true;
+  # nix-mineral.overrides.software-choice.hardened-kernel = true;
 
   # Dont use the nix-mineral default firewall, if you wish to use alternate
   # applications for the same purpose.
-  # nm-overrides.software-choice.no-firewall.enable = true;
+  # nix-mineral.overrides.software-choice.no-firewall = true;
 
 }))
