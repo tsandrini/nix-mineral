@@ -469,7 +469,7 @@ in
             /dev/shm, /run, /dev, /proc
           '';
         };
-      }
+      };
     };
   };
 
